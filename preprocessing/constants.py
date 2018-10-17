@@ -1,0 +1,3 @@
+USER_ID = 0
+PROFILE_ID = 1
+RATINGS = 2
