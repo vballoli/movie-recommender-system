@@ -2,6 +2,7 @@ import time
 
 import pandas as pd
 import numpy as np
+import pickle
 from preprocessing.constants import USER_ID, PROFILE_ID, RATINGS
 
 class CleanData:
@@ -25,20 +26,35 @@ class CleanData:
         df = pd.read_csv(filename, header=None)
         return df
 
-    def process(self):
+    def process(self, limit_users):
         """
         Initializes output matrix and fills the matrix with ratings according to the dataset.
+
+        Input:
+        @limit - number of entries in the dataset to be considered.
+
+        Output:
+        Dataframe and numpy array saved as 'data_df.csv' and 'data_np.npy' respectively.
         """
         clean_start_time = time.time()
-        print("Start time: " + str(clean_start_time))
-        df = self.read_data(self.filename)
-        final_matrix = np.zeros([self.number_unique_users , self.number_profiles])
+        print("Formatting dataset")
+        df = self.read_data(filename=self.filename)
+        profile_columns = sorted(list(set(list(df[PROFILE_ID]))))
+        user_rows = [i for i in range(1,limit_users+1)]
+        final_df = pd.DataFrame(index=user_rows, columns=profile_columns)
         for i in range(len(df[USER_ID])):
-            if i%1000 == 0:
-                print("Reached " + str(i))
-            final_matrix[df.iloc[i][USER_ID]-1][df.iloc[i][PROFILE_ID]-1] = df.iloc[i][RATINGS]
-        np.save('../data.npy', final_matrix)
-        print("Clean time: " + str(time.time() - clean_start_time))
+            if df.iloc[i][USER_ID] <= limit_users:
+                print("USER " + str(df.iloc[i][USER_ID]))
+                print("PROFILE " + str(df.iloc[i][PROFILE_ID]))
+                print("Ratings: " + str(df.iloc[i][RATINGS]))
+                final_df.loc[df.iloc[i][USER_ID]][df.loc[i][PROFILE_ID]] = df.iloc[i][RATINGS]
+            else:
+                break
+        final_df.to_csv('data_df.csv')
+        np.save('data_np.npy', final_df.values)
+        print("Format time: " + str(time.time() - clean_start_time))
+        print("Formatted dataset.")
+
 
 if __name__=="__main__":
     cleaner = CleanData('ratings.dat')
