@@ -1,6 +1,7 @@
 import numpy as np
 import random
 
+from svd.svd_algorithm import SVDAlgorithm
 
 def cur(M, c, r, repeat=None, retain=0.8):
     """
@@ -20,7 +21,7 @@ def cur(M, c, r, repeat=None, retain=0.8):
     print(cols_sel)
     W = M[rows_sel, :]
     W = W[:, cols_sel]
-    _, W, _ = np.linalg.svd(W)
+    _, W, _ = SVDAlgorithm().svd(W)
     for i in range(W.shape[0]):
         if W[i] != 0:
             W[i] = 1 / W[i]
