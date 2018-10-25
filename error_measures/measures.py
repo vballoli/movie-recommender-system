@@ -15,7 +15,7 @@ def rmse(M, M_p):
     y_len = M.shape[1]
     error = 0
     N = x_len * y_len
-    for i in range(x_len):
+    for x in range(x_len):
         for y in range(y_len):
             error += ((M[x][y] - M_p[x][y]) ** 2) / N
     error = error ** 0.5

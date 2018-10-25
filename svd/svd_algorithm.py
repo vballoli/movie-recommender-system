@@ -69,8 +69,8 @@ class SVDAlgorithm:
         except AssertionError as ae:
             return "Wrong Matrix type. (numpy.ndarray) required."
 
-        eigen_values_u, U = self.eigen_decomposition(np.matmul(M, M.T))
-        eigen_values_v, V = self.eigen_decomposition(np.matmul(M.T, M))
+        eigen_values_u, U = self.eigen_decomposition(np.dot(M, M.T))
+        eigen_values_v, V = self.eigen_decomposition(np.dot(M.T, M))
 
         V = V.T
         print(eigen_values_u)

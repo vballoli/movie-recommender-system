@@ -50,6 +50,8 @@ class CleanData:
                 final_df.loc[df.iloc[i][USER_ID]][df.loc[i][PROFILE_ID]] = df.iloc[i][RATINGS]
             else:
                 break
+        final_df= final_df.dropna(how='all')
+        final_df = final_df.fillna(0)
         final_df.to_csv('data_df.csv')
         np.save('data_np.npy', final_df.values)
         print("Format time: " + str(time.time() - clean_start_time))
