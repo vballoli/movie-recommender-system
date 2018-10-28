@@ -1,6 +1,6 @@
-# CS F469 Jester Recommender System
+# CS F469 Movie Recommender System
 
-This project is a recommender system based on the Jester dataset built using
+This project is a recommender system based on the MovieLens dataset built using
 
 1. Collaborative filtering
 2. SVD - Singular Value Decomposition
@@ -14,11 +14,11 @@ This project is a recommender system based on the Jester dataset built using
 
 ## Build instructions
 
-`./run.sh`
+`bash ./run.sh`
 
 ## Dataset
 
-Link: `http://www.occamslab.com/petricek/data/ratings.dat`
+Link: `http://files.grouplens.org/datasets/movielens/ml-100k.zip`
 
 ## Contribution Guidelines
 

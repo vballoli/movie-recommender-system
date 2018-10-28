@@ -22,8 +22,9 @@ def cur(M, c, r, repeat=None, retain=0.8):
     W = M[rows_sel, :]
     W = W[:, cols_sel]
     _, W, _ = SVDAlgorithm().svd(W)
+    print(W.shape)
     for i in range(W.shape[0]):
-        if W[i] != 0:
+        if W[i][0] != 0:
             W[i] = 1 / W[i]
     if retain != 1.0:
         W_sum = np.sum(W ** 2)
@@ -36,7 +37,10 @@ def cur(M, c, r, repeat=None, retain=0.8):
                 M_row = M_row[:retention_index, :]
                 break
     W = np.diag(W)
-    M_p = np.matmul(np.matmul(M_col,  W), M_row)
+    print(M_col.shape)
+    print(W.shape)
+    print(M_row.shape)
+    M_p = np.dot(np.dot(M_col,  W), M_row)
     print("M_p")
     print(M_p)
     return M_p

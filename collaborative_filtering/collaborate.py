@@ -1,7 +1,7 @@
 import time
 import numpy as np
-from similarities import pearson_sim as sim
-from constants import INT_MIN
+from collaborative_filtering.similarities import pearson_sim as sim
+from collaborative_filtering.constants import INT_MIN
 
 class Collaborate:
     """
