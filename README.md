@@ -16,6 +16,11 @@ This project is a recommender system based on the MovieLens dataset built using
 
 `bash ./run.sh`
 
+## Building docs
+
+Navigate to `root/docs` and run
+`make html`
+
 ## Results
 
 | Recommender System algorithm | RMSE | Precision on Top K  | Spearman Rank Correlation | Time taken for prediction |
