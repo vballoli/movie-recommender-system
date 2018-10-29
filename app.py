@@ -48,7 +48,7 @@ def run_svd_reduce(M):
 
 def run_cur(M):
     cur_start = time.time()
-    M_p = cur(M, 600, 600, repeat=True)
+    M_p = cur(M, 600, 600, repeat=False)
     print("CUR Time: " +str(time.time() - cur_start))
     print("RMSE CUR: " + str(rmse(M, M_p)))
     print("Top K precision CUR: " + str(top_k(40, M, M_p)))

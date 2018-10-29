@@ -22,10 +22,10 @@ This project is a recommender system based on the MovieLens dataset built using
 |:-------------:|:-------------:|:-----:|:-----:| :-----:|
 | Collaborative Filtering |||| |
 | Collaborative Filtering with Baseline approach |||| |
-| SVD |||| |
-| SVD with 90% retention |||| |
-| CUR |||| |
-| CUR with 90% retention |||| |
+| SVD | 1.2 | 0.31 | 0.99 | 30s |
+| SVD with 90% retention | 1.3 | 0.31 | 0.99 | 28s |
+| CUR | 0.8 | 0.31 | 0.99 | 2.5s |
+| CUR with 90% retention | 0.9 | 0.31 | 0.99 | 5s |
 ## Dataset
 
 Link: `http://files.grouplens.org/datasets/movielens/ml-100k.zip`

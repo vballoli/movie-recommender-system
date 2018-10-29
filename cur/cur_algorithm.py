@@ -24,7 +24,7 @@ def cur(M, c, r, dim_red = None, repeat=None):
     for i in range(W.shape[0]):
         W[i][i] = 1 / W[i][i]
     U = np.dot(np.dot(W_v.T, W ** 2), W_u.T)
-    M_p = np.dot(np.dot(M_col,  U), M_row)
+    M_p = np.dot(np.dot(M_col,  U), M_row.T)
     return M_p
 
 
