@@ -8,6 +8,7 @@ from preprocessing.clean import CleanData
 from svd.svd_algorithm import SVDAlgorithm
 from error_measures.measures import *
 from cur.cur_algorithm import *
+from collaborative_filtering.collaborate import *
 
 def format_dataset():
     for file in os.listdir('preprocessing/'):
@@ -21,10 +22,23 @@ def format_dataset():
 
 
 def run_collaborative_filtering(M):
-    pass
+    start = time.time()
+    m = M[300:350, 150:200].T
+    cf = Collaborate(m.T)
+    m_p = np.transpose(cf.fill())
+    print("Collaborative Filtering Time: " +str(time.time() - start))
+    print("RMSE Collaborative Filtering: " + str(rmse(m, m_p)))
+    print("Top K precision Collaborative Filtering: " + str(top_k(40, m, m_p)))
+    print("Spearman correlation Collaborative Filtering: " + str(spearman_correlation(m, m_p)))
 
 def run_collaborative_filtering_baseline(M):
-    pass
+    m = M[300:350, 150:200]
+    cfb = Collaborate(m.T)
+    m_p = np.transpose(cfb.fill(baseline=True))
+    print("Collaborative Filtering with baseline Time: " +str(time.time() - start))
+    print("RMSE Collaborative Filtering with baseline: " + str(rmse(m, m_p)))
+    print("Top K precision Collaborative Filtering with baseline: " + str(top_k(40, m, m_p)))
+    print("Spearman correlation Collaborative Filtering with baseline: " + str(spearman_correlation(m, m_p)))
 
 def run_svd(M):
     s = SVDAlgorithm()
@@ -74,8 +88,8 @@ if __name__=="__main__":
         format_dataset()
     M = np.load('data.npy')
     run_collaborative_filtering(M)
-    run_collaborative_filtering_baseline(M)
-    run_svd(M)
-    run_svd_reduce(M)
-    run_cur(M)
-    run_cur_reduce(M)
+    #run_collaborative_filtering_baseline(M)
+    #run_svd(M)
+    #run_svd_reduce(M)
+    #run_cur(M)
+    #run_cur_reduce(M)

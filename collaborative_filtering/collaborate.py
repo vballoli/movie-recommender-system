@@ -11,13 +11,22 @@ class Collaborate:
         """
         Initialize utility (ratings) matrix
         Note: Matrix needs to have items as rows and users as columns
+
+        Input:
+        M (numpy.ndarray): Input Matrix
         """
         self.M = M
 
     def estimate(self, user, item, k=2, baseline=False):
         """
         Estimate rating for a given input user and item.
-        k nearest neighbours taken based on similarity (k = 2 by default).
+
+        Input:
+        user (int): Index of User
+        item (int): Index of Item
+        k (int): Nearest neighbours taken based on similarity (default = 2)
+        baseline (bool): Toggle baseline offset (default = False)
+
         """
         # Ratings matrix
         r = self.M
@@ -37,7 +46,7 @@ class Collaborate:
         ### Rating estimation ###
         # Calculate similarities
         S = np.zeros(r.shape[0])
-        for i in r[:, user]:
+        for i in range(r.shape[0]):
             S[i] = sim(r, item, i)
         S = S[1:]
         # Estimate the rating
@@ -58,9 +67,11 @@ class Collaborate:
     def fill(self, k=2, baseline=False):
         """
         Fills gaps in utility matrix using CF estimates
+
+        Input:
+        k (int): Nearest neighbours taken based on similarity (default = 2)
+        baseline (bool): Toggle baseline offset (default = False)
         """
-        # Start time
-        t0 = time.time()
         # Complete the matrix
         filled = np.zeros(self.M.shape)
         for i in range(self.M.shape[0]):
@@ -69,19 +80,4 @@ class Collaborate:
                     filled[i, j] = self.estimate(j, i, k=k, baseline=baseline)
                 else:
                     filled[i, j] = self.M[i, j]
-
-        print("CF estimation time: ", time.time() - t0)
         return filled
-################ TEST BLOCK #################
-if __name__ == "__main__":
-    input_mat = np.array([[1,0,3,0,0,5,0,0,5,0,4,0],
-                   [0,0,5,4,0,0,4,0,0,2,1,3],
-                   [2,4,0,1,2,0,3,0,4,3,5,0],
-                   [0,2,4,0,5,0,0,4,0,0,2,0],
-                   [0,0,4,3,4,2,0,0,0,0,2,5],
-                   [1,0,3,0,3,0,0,2,0,0,4,0]])
-
-    cf = Collaborate(input_mat)
-    output_mat = cf.fill()
-    print(output_mat)
-##############################################
