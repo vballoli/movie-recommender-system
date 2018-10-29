@@ -25,8 +25,8 @@ Navigate to `root/docs` and run
 
 | Recommender System algorithm | RMSE | Precision on Top K  | Spearman Rank Correlation | Time taken for prediction |
 |:-------------:|:-------------:|:-----:|:-----:| :-----:|
-| Collaborative Filtering |||| |
-| Collaborative Filtering with Baseline approach |||| |
+| Collaborative Filtering | 0 | 0.72 | 1.0 | 12.92s |
+| Collaborative Filtering with Baseline approach | 3.62 | 0.19 | 1.0 | 14s |
 | SVD | 1.2 | 0.31 | 0.99 | 30s |
 | SVD with 90% retention | 1.3 | 0.31 | 0.99 | 28s |
 | CUR | 0.8 | 0.31 | 0.99 | 2.5s |

@@ -32,6 +32,7 @@ def run_collaborative_filtering(M):
     print("Spearman correlation Collaborative Filtering: " + str(spearman_correlation(m, m_p)))
 
 def run_collaborative_filtering_baseline(M):
+    start = time.time()
     m = M[300:350, 150:200]
     cfb = Collaborate(m.T)
     m_p = np.transpose(cfb.fill(baseline=True))
@@ -88,8 +89,8 @@ if __name__=="__main__":
         format_dataset()
     M = np.load('data.npy')
     run_collaborative_filtering(M)
-    #run_collaborative_filtering_baseline(M)
-    #run_svd(M)
-    #run_svd_reduce(M)
-    #run_cur(M)
-    #run_cur_reduce(M)
+    run_collaborative_filtering_baseline(M)
+    run_svd(M)
+    run_svd_reduce(M)
+    run_cur(M)
+    run_cur_reduce(M)
