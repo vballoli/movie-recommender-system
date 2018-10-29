@@ -48,15 +48,30 @@ class Collaborate:
         S = np.zeros(r.shape[0])
         for i in range(r.shape[0]):
             S[i] = sim(r, item, i)
-        S = S[1:]
+            if np.isnan(S[i]):
+                S[i] = 0
         # Estimate the rating
         numerator = 0
-        denominator = 0
-        for _ in range(k):
-            max_idx = np.argmax(S)
-            numerator += (r[max_idx, user] - b_user)*S[max_idx]
-            denominator += S[max_idx]
-            S[max_idx] = INT_MIN
+        s_list = list(S)
+        max = sorted(S, reverse=True)[1:3]
+
+        max_idx = list()
+        for i in max:
+            if i != 1:
+                if len(max_idx) == k:
+                    break
+                else:
+                    max_idx.append(s_list.index(i))
+
+        denominator = np.sum(max)
+        denominator = np.sum(max)
+
+        for i in max_idx:
+            if baseline:
+                b_ui = b_user + sum(r[i])/np.count_nonzero(r[i])
+            else:
+                b_ui = 0
+            numerator += (r[i, user] - b_ui)*S[i]
 
         rating = b + (numerator/denominator)
         if np.isnan(rating):
