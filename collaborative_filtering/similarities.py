@@ -3,6 +3,11 @@ import numpy as np
 def pearson_sim(M, x, y):
     """
     Pearson correlation coefficient of two rows M(x) and M(y)
+
+    Input:
+    M (numpy.ndarray): Input Matrix
+    x (int): Index of first item
+    y (int): Index of second item
     """
     x_mean = sum(M[x])/np.count_nonzero(M[x])
     y_mean = sum(M[y])/np.count_nonzero(M[y])
