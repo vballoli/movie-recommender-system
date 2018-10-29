@@ -84,4 +84,6 @@ def spearman_correlation(M, M_p):
             if M[i][j] != 0:
                 N += 1
                 sum += (M[i][j] - M_p[i][j]) ** 2
-    sum = 1 - (sum/n*((n**2) - 1))
+    N = (N*(N**2 - 1))
+    sum = 1 - (sum/N)
+    return sum

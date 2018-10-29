@@ -73,8 +73,6 @@ class SVDAlgorithm:
         eigen_values_v, V = self.eigen_decomposition(np.dot(M.T, M))
 
         V = V.T
-        print(eigen_values_u)
-        print(eigen_values_v)
 
         sigma = np.diag([i**0.5 for i in eigen_values_u])
         if dimension_reduction == 1.0 or dimension_reduction == None:
